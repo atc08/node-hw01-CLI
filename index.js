@@ -1,7 +1,12 @@
-const contacts = require("./contacts");
-// import { Command } from "commander/esm.mjs";
+const {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+} = require("./contacts");
 const { Command } = require("commander");
 const program = new Command();
+
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
@@ -12,24 +17,23 @@ program
 program.parse(process.argv);
 
 const argv = program.opts();
-console.log(argv);
-// TODO: рефакторить
+
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      contacts.listContacts;
+      listContacts();
       break;
 
     case "get":
-      contacts.getContactById(id);
+      getContactById(id);
       break;
 
     case "add":
-      contacts.addContact(name, email, phone);
+      addContact(name, email, phone);
       break;
 
     case "remove":
-      // ... id
+      removeContact(id);
       break;
 
     default:
